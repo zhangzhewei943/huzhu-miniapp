@@ -1,5 +1,5 @@
 // API 配置
-const BASE_URL = 'https://jojometro.com';
+const BASE_URL = 'https://jojometro.cloud';
 
 function request(url, options = {}) {
   return new Promise((resolve, reject) => {
