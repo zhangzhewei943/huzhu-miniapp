@@ -1,0 +1,14 @@
+<!-- 登录页 -->
+<view class="page">
+  <view class="login-card">
+    <view class="logo">🤝</view>
+    <view class="app-name">互助小程序</view>
+    <view class="app-desc">校园互助，让每一次求助都有回应</view>
+
+    <button class="btn-wx-login" bindtap="wxLogin">
+      微信一键登录
+    </button>
+
+    <view class="hint">登录后即可发布和接单</view>
+  </view>
+</view>

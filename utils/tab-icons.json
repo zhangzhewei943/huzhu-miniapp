@@ -1,0 +1,18 @@
+{
+  "home": {
+    "iconPath": "/uploads/1778138408488_y4lsqe.png",
+    "selectedIconPath": "/images/home-active.png"
+  },
+  "publish": {
+    "iconPath": "/images/publish.png",
+    "selectedIconPath": "/images/publish-active.png"
+  },
+  "messages": {
+    "iconPath": "/images/msg.png",
+    "selectedIconPath": "/images/msg-active.png"
+  },
+  "profile": {
+    "iconPath": "/images/profile.png",
+    "selectedIconPath": "/images/profile-active.png"
+  }
+}

@@ -1,0 +1,14 @@
+<!-- 自定义 Tab Bar -->
+<view class="tab-bar">
+  <view
+    wx:for="{{list}}"
+    wx:key="index"
+    class="tab {{selected === index ? 'active' : ''}}"
+    data-index="{{index}}"
+    data-path="{{item.pagePath}}"
+    bindtap="switchTab"
+  >
+    <image class="tab-icon" src="{{selected === index ? item.selectedIconPath : item.iconPath}}" />
+    <text class="tab-label">{{item.text}}</text>
+  </view>
+</view>

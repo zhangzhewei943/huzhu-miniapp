@@ -1,0 +1,80 @@
+<!-- 首页 -->
+<view class="page">
+  <!-- 固定顶部区域 -->
+  <view class="top-area">
+    <!-- Banner 轮播 -->
+    <swiper class="banner" indicator-dots autoplay interval="4000" circular>
+      <swiper-item wx:for="{{banners}}" wx:key="order" class="banner-slide" data-url="{{item.url}}" bindtap="onBannerTap">
+        <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+
+    <!-- 分类筛选标签（吸顶） -->
+    <scroll-view class="filter-scroll" scroll-x enable-flex>
+      <view class="filter-tabs">
+        <view
+          wx:for="{{filters}}"
+          wx:key="*this"
+          class="filter-tab {{activeFilter === item ? 'active' : ''}}"
+          data-filter="{{item}}"
+          bindtap="onFilterTap"
+        >{{item}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 可滚动卡片区域 -->
+  <scroll-view class="feed-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="sec-header">
+      <text class="sec-title">{{sortLabel}}</text>
+      <view class="sec-more" bindtap="showSortSheet">筛选</view>
+    </view>
+
+    <view class="feed">
+      <view
+        wx:for="{{feedList}}"
+        wx:key="id"
+        class="feed-card"
+        data-id="{{item.id}}"
+        bindtap="openDetail"
+      >
+        <view class="card-top">
+          <view class="card-body">
+            <view class="card-title">{{item.title}}</view>
+            <view class="card-meta">
+              <text>{{item.user}}</text>
+              <text>{{item.location}}</text>
+              <text>{{item.time}}</text>
+              <text class="card-tag">{{item.tag}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="card-bottom">
+          <view class="card-reward">{{item.reward > 0 ? '¥' + item.reward : '无偿'}}</view>
+          <view class="card-action" catchtap="openDetail" data-id="{{item.id}}">去接单</view>
+        </view>
+      </view>
+
+      <view class="placeholder" wx:if="{{feedList.length === 0}}">
+        <text class="placeholder-text">暂无该类任务</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 排序浮层（放在最外层避免裁剪） -->
+<view class="sort-overlay {{showSort ? 'show' : ''}}" bindtap="hideSortSheet">
+  <view class="sort-sheet" catchtap="noop">
+    <view class="sort-sheet-title">排序方式</view>
+    <view
+      wx:for="{{sortOptions}}"
+      wx:key="key"
+      class="sort-option {{activeSort === item.key ? 'selected' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="selectSort"
+    >
+      <text>{{item.label}}</text>
+      <text class="check">✓</text>
+    </view>
+  </view>
+</view>

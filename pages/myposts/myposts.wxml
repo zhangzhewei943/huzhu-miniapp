@@ -1,0 +1,28 @@
+<!-- 我的发布 -->
+<view class="page">
+  <view class="feed" wx:if="{{myPosts.length > 0}}">
+    <view wx:for="{{myPosts}}" wx:key="id" class="feed-card">
+      <view class="card-top">
+        <view class="card-avatar" style="background: #4A90D9;">我</view>
+        <view class="card-body">
+          <view class="card-title">{{item.title}}</view>
+          <view class="card-meta">
+            <text>{{item.location}}</text>
+            <text>{{item.time}}</text>
+            <text class="card-tag">{{item.tag}}</text>
+            <text class="post-status {{item.status === 'done' ? 'done' : 'pending'}}">{{item.status === 'done' ? '已接单' : '未完成'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="card-bottom">
+        <view class="card-reward">{{item.reward > 0 ? '¥' + item.reward : '无偿'}}</view>
+        <view class="post-delete" catchtap="deletePost" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="placeholder" wx:else>
+    <text class="placeholder-icon">📋</text>
+    <text class="placeholder-text">暂无发布记录</text>
+  </view>
+</view>

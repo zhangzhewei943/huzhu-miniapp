@@ -1,0 +1,68 @@
+<!-- 发布任务页 -->
+<view class="page">
+  <view class="form-wrap">
+    <!-- 任务类型 -->
+    <view class="form-group">
+      <view class="form-label">任务类型</view>
+      <view class="type-grid">
+        <view
+          wx:for="{{types}}"
+          wx:key="*this"
+          class="type-chip {{selectedType === item ? 'selected' : ''}}"
+          data-type="{{item}}"
+          bindtap="selectType"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <!-- 任务标题 -->
+    <view class="form-group">
+      <view class="form-label">任务标题</view>
+      <input class="form-input" placeholder="简单描述你想找人帮忙做什么" maxlength="40" value="{{title}}" bindinput="onTitleInput" />
+    </view>
+
+    <!-- 悬赏金额 -->
+    <view class="form-group">
+      <view class="form-label">悬赏金额（元）</view>
+      <input class="form-input" type="digit" placeholder="填写你愿意支付的报酬" value="{{reward}}" bindinput="onRewardInput" />
+    </view>
+
+    <!-- 所在地点 -->
+    <view class="form-group">
+      <view class="form-label">所在地点</view>
+      <view class="form-picker {{location ? '' : 'placeholder'}}" bindtap="showLocationPicker">
+        {{location || '请选择地点'}}
+        <text class="picker-arrow">▾</text>
+      </view>
+    </view>
+
+    <!-- 任务描述 -->
+    <view class="form-group">
+      <view class="form-label">任务描述</view>
+      <textarea class="form-textarea" placeholder="详细描述任务要求、时间、地点等信息" maxlength="300" value="{{desc}}" bindinput="onDescInput" />
+    </view>
+
+    <!-- 发布按钮 -->
+    <button class="form-submit" bindtap="submitTask">发布任务</button>
+  </view>
+</view>
+
+<!-- 地点选择半窗 -->
+<view class="picker-overlay {{showPicker ? 'show' : ''}}" bindtap="hideLocationPicker">
+  <view class="picker-sheet" catchtap="noop">
+    <view class="picker-header">
+      <text class="picker-cancel" bindtap="hideLocationPicker">取消</text>
+      <text class="picker-title">选择地点</text>
+      <text class="picker-confirm" bindtap="confirmLocation">确定</text>
+    </view>
+    <scroll-view class="picker-body" scroll-y enhanced show-scrollbar="{{false}}">
+      <view
+        wx:for="{{locations}}"
+        wx:key="*this"
+        class="picker-option {{tempLocation === item ? 'selected' : ''}}"
+        data-loc="{{item}}"
+        bindtap="selectLocation"
+      >{{item}}</view>
+    </scroll-view>
+  </view>
+</view>

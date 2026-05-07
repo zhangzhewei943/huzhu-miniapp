@@ -1,0 +1,44 @@
+<!-- 任务详情页 -->
+<view class="page" wx:if="{{task}}">
+  <!-- 头部 -->
+  <view class="detail-hero">
+    <view class="detail-status">{{task.reward > 0 ? '悬赏中' : '求助中'}}</view>
+    <view class="detail-title">{{task.title}}</view>
+    <view class="detail-reward">
+      <block wx:if="{{task.reward > 0}}">¥{{task.reward}}<text class="unit"> 报酬</text></block>
+      <block wx:else><text class="free-label">无偿帮助</text></block>
+    </view>
+  </view>
+
+  <!-- 任务描述 -->
+  <view class="detail-section">
+    <view class="section-label">任务描述</view>
+    <view class="section-text">{{task.desc}}</view>
+  </view>
+
+  <!-- 任务信息 -->
+  <view class="detail-section">
+    <view class="section-label">任务信息</view>
+    <view class="section-text muted">{{task.location}} · {{task.time}} · {{task.tag}}</view>
+  </view>
+
+  <!-- 发布者 -->
+  <view class="detail-publisher">
+    <view class="pub-avatar" style="background: {{task.userColor}};">{{task.user[0]}}</view>
+    <view class="pub-info">
+      <view class="pub-name">{{task.user}}</view>
+      <view class="pub-meta">{{task.pubMeta}}</view>
+    </view>
+    <view class="pub-badge">已认证</view>
+  </view>
+
+  <!-- 接单按钮 -->
+  <view class="detail-cta">
+    <button class="btn-primary" bindtap="acceptTask">我要接单</button>
+  </view>
+</view>
+
+<!-- 加载中 -->
+<view class="loading" wx:else>
+  <text>加载中...</text>
+</view>
