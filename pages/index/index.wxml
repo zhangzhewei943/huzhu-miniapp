@@ -5,7 +5,12 @@
     <!-- Banner 轮播 -->
     <swiper class="banner" indicator-dots autoplay interval="4000" circular>
       <swiper-item wx:for="{{banners}}" wx:key="order" class="banner-slide" data-url="{{item.url}}" bindtap="onBannerTap">
-        <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+        <image wx:if="{{item.image}}" class="banner-img" src="{{item.image}}" mode="aspectFill" />
+        <view wx:else class="banner-placeholder" style="background: {{item.bg}};">
+          <text class="banner-ptag">{{item.tag}}</text>
+          <text class="banner-ptitle">{{item.title}}</text>
+          <text class="banner-psub">{{item.sub}}</text>
+        </view>
       </swiper-item>
     </swiper>
 

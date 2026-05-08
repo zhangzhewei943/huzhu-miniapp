@@ -22,20 +22,23 @@ Page({
   },
 
   async loadConfig() {
+    const defaultBanners = [
+      { image: '', url: '', order: 1, bg: 'linear-gradient(135deg, #4A90D9, #3060B0)', tag: '新学期', title: '校园互助', sub: '发布任务或接单，轻松解决校园生活难题' },
+      { image: '', url: '', order: 2, bg: 'linear-gradient(135deg, #06B6D4, #0891B2)', tag: '限时活动', title: '首单免手续费', sub: '新用户首次发布或接单，平台不收取任何费用' },
+      { image: '', url: '', order: 3, bg: 'linear-gradient(135deg, #8B5CF6, #6D28D9)', tag: '安全须知', title: '实名认证已上线', sub: '所有用户需完成学籍认证后才能发布和接单' }
+    ];
     try {
       const cfg = await api.getConfig();
-      if (cfg.banners) {
-        this.setData({
-          banners: cfg.banners.filter(b => b.image),
-          filters: cfg.categories || ['全部']
-        });
+      if (cfg.banners && cfg.banners.length > 0) {
+        const banners = cfg.banners.filter(b => b.image).length > 0
+          ? cfg.banners.filter(b => b.image)
+          : defaultBanners;
+        this.setData({ banners, filters: cfg.categories || ['全部'] });
       }
     } catch (e) {
-      // 降级到本地 config
-      const CONFIG = app.CONFIG;
       this.setData({
-        banners: CONFIG.banners || [],
-        filters: CONFIG.categories || ['全部']
+        banners: defaultBanners,
+        filters: app.CONFIG.categories || ['全部']
       });
     }
   },
